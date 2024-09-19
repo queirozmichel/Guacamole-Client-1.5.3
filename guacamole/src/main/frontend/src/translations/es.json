@@ -27,7 +27,7 @@
         "ACTION_UPDATE_PASSWORD"    : "Actualizar Contraseña",
         "ACTION_VIEW_HISTORY"       : "Historial",
 
-        "DIALOG_HEADER_ERROR" : "Error",
+        "DIALOG_HEADER_ERROR" : "¡Error!",
 
         "ERROR_PAGE_UNAVAILABLE"  : "Ha ocurrido un error y esta acción no se puede completar. Si el problema persiste, notifique al administrador del sistema o verifique los registros del sistema.",
         "ERROR_PASSWORD_BLANK"    : "La contraseña no puede estar en blanco.",
@@ -43,8 +43,15 @@
         "INFO_ACTIVE_USER_COUNT" : "Actualmente en uso por {USERS} {USERS, plural, one{user} other{users}}.",
 
         "TEXT_ANONYMOUS_USER"   : "Anónimo",
-        "TEXT_HISTORY_DURATION" : "{VALUE} {UNIT, select, second{{VALUE, plural, one{second} other{seconds}}} minute{{VALUE, plural, one{minute} other{minutes}}} hour{{VALUE, plural, one{hour} other{hours}}} day{{VALUE, plural, one{day} other{days}}} other{}}"
+        "TEXT_HISTORY_DURATION" : "{VALUE} {UNIT, select, second{{VALUE, plural, one{second} other{seconds}}} minute{{VALUE, plural, one{minute} other{minutes}}} hour{{VALUE, plural, one{hour} other{hours}}} day{{VALUE, plural, one{day} other{days}}} other{}}",
 
+
+
+
+        "INFO_LOGGED_OUT" : "¡Has sido desconectado!",
+        "INFO_LOGIN" : "Haz clic en el botón de abajo para iniciar sesión nuevamente.",
+        "BTN_LOGIN" : "Acceso",
+        "BTN_LOGIN_TITLE" : "Ir a la página de inicio de sesión"
     },
 
     "CLIENT" : {

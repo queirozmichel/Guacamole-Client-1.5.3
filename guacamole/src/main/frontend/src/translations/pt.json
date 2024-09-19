@@ -27,7 +27,7 @@
         "ACTION_UPDATE_PASSWORD"    : "Alterar senha",
         "ACTION_VIEW_HISTORY"       : "Histórico",
 
-        "DIALOG_HEADER_ERROR" : "Erro",
+        "DIALOG_HEADER_ERROR" : "Erro!",
 
         "ERROR_PAGE_UNAVAILABLE"  : "Um erro ocorreu e esta ação não pode ser completada. Se o problema persistir, por favor contacte o administrador do sistema ou verifique os logs do sistema.",
         "ERROR_PASSWORD_BLANK"    : "Sua senha não pode ficar em branco.",
@@ -44,8 +44,15 @@
 
         "TEXT_ANONYMOUS_USER"   : "Anônimo",
         "TEXT_HISTORY_DURATION" : "{VALUE} {UNIT, select, second{{VALUE, plural, one{segundo} other{segundos}}} minute{{VALUE, plural, one{minuto} other{minutos}}} hour{{VALUE, plural, one{hora} other{horas}}} day{{VALUE, plural, one{dia} other{dias}}} other{}}",
-        "TEXT_UNTRANSLATED" : "{MESSAGE}"
+        "TEXT_UNTRANSLATED" : "{MESSAGE}",
 
+
+
+
+        "INFO_LOGGED_OUT" : "Você foi desconectado!",
+        "INFO_LOGIN" : "Clique no botão abaixo para realizar um novo login.",
+        "BTN_LOGIN" : "Login",
+        "BTN_LOGIN_TITLE" : "Ir para a tela de login"
     },
 
     "CLIENT" : {

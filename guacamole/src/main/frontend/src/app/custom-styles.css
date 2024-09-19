@@ -25,3 +25,40 @@ under the License. */
 .login-ui {
   background-image: url("images/background.jpg") !important;
 }
+
+.btn-call-login {
+  cursor: pointer;
+}
+
+.p-call-login-msg {
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.h3-header-error {
+  margin: 0;
+}
+
+.h3-header-info-logout {
+  margin: 0;
+}
+
+.fatal-page-error {
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.fatal-error-msg {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.notification {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.p-error-page-unavailable {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}

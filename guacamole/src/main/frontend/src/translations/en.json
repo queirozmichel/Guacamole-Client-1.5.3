@@ -34,7 +34,7 @@
         "ACTION_VIEW_HISTORY"       : "History",
         "ACTION_VIEW_RECORDING"     : "View",
 
-        "DIALOG_HEADER_ERROR" : "Error",
+        "DIALOG_HEADER_ERROR" : "Error!",
 
         "ERROR_PAGE_UNAVAILABLE"  : "An error has occurred and this action cannot be completed. If the problem persists, please notify your system administrator or check your system logs.",
         "ERROR_PASSWORD_BLANK"    : "Your password cannot be blank.",
@@ -48,12 +48,19 @@
         "FORMAT_DATE_TIME_PRECISE" : "yyyy-MM-dd HH:mm:ss",
 
         "INFO_ACTIVE_USER_COUNT" : "Currently in use by {USERS} {USERS, plural, one{user} other{users}}.",
-        "INFO_LOGGED_OUT"        : "You have been logged out.",
 
         "TEXT_ANONYMOUS_USER"   : "Anonymous",
         "TEXT_HISTORY_DURATION" : "{VALUE} {UNIT, select, second{{VALUE, plural, one{second} other{seconds}}} minute{{VALUE, plural, one{minute} other{minutes}}} hour{{VALUE, plural, one{hour} other{hours}}} day{{VALUE, plural, one{day} other{days}}} other{}}",
-        "TEXT_UNTRANSLATED" : "{MESSAGE}"
+        "TEXT_UNTRANSLATED" : "{MESSAGE}",
 
+
+
+
+
+        "INFO_LOGGED_OUT" : "You have been logged out!",
+        "INFO_LOGIN" : "Click the button below if you wish to log in again.",
+        "BTN_LOGIN" : "Login",
+        "BTN_LOGIN_TITLE" : "Go to login page"
     },
 
     "CLIENT" : {
