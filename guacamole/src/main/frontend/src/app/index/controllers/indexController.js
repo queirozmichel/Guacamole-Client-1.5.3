@@ -254,11 +254,14 @@ angular.module("index").controller("indexController", [
 
     // Display login screen if a whole new set of credentials is needed
     $scope.$on("guacInvalidCredentials", function loginInvalid(event, parameters, error) {
-      setApplicationState(ApplicationState.AWAITING_CREDENTIALS);
-
-      $scope.loginHelpText = null;
-      $scope.acceptedCredentials = {};
-      $scope.expectedCredentials = error.expected;
+      if ($location.path() !== "/") {
+        callLoginPage();
+      } else {
+        setApplicationState(ApplicationState.AWAITING_CREDENTIALS);
+        $scope.loginHelpText = null;
+        $scope.acceptedCredentials = {};
+        $scope.expectedCredentials = error.expected;
+      }
     });
 
     // Prompt for remaining credentials if provided credentials were not enough
