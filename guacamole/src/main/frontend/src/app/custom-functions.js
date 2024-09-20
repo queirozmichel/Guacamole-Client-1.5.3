@@ -17,7 +17,15 @@
  * under the License.
  */
 
+//Chama a aplicação Cloud Login Handler passando o id do cliente obtido na URL
 function callLoginPage() {
   const params = new URLSearchParams(window.location.href);
   window.location.href = "https://loginunicohml.engeman.com:30002/Home/SingleSignOnUri?customerSetupId=" + params.get("CsId");
+}
+
+//Realiza a limpeza das variáveis do Local Storage após realizar o login
+function clearLocalStorage() {
+  localStorage.removeItem("GUAC_AUTH");
+  localStorage.removeItem("GUAC_PREFERENCES");
+  localStorage.removeItem("GUAC_HISTORY");
 }
