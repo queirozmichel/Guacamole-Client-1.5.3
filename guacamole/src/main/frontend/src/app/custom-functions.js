@@ -19,8 +19,20 @@
 
 //Chama a aplicação Cloud Login Handler passando o id do cliente obtido na URL
 function callLoginPage() {
-  const params = new URLSearchParams(window.location.href);
-  window.location.href = "https://loginunicohml.engeman.com:30002/Home/SingleSignOnUri?customerSetupId=" + params.get("CsId");
+  if (sessionStorage.getItem("CsId") !== null) {
+    window.location.href = "https://loginunicohml.engeman.com:30002/Home/SingleSignOnUri?customerSetupId=" + sessionStorage.getItem("CsId");
+  } else {
+    const params = new URLSearchParams(window.location.href);
+    window.location.href = "https://loginunicohml.engeman.com:30002/Home/SingleSignOnUri?customerSetupId=" + params.get("CsId");
+  }
+}
+
+///Define a variável de sessão CsId
+function defineSessionStorage() {
+  if (sessionStorage.getItem("CsId") === null) {
+    const params = new URLSearchParams(window.location.href);
+    sessionStorage.setItem("CsId", params.get("CsId"));
+  }
 }
 
 //Realiza a limpeza das variáveis do Local Storage após realizar o login

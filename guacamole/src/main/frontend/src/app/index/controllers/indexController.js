@@ -22,6 +22,7 @@
  */
 
 clearLocalStorage();
+defineSessionStorage();
 
 angular.module("index").controller("indexController", [
   "$scope",
