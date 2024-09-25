@@ -140,9 +140,9 @@ angular.module("client").directive("guacClientNotification", [
          * Renderiza o botão de login
          */
         const LOGIN_ACTION = {
-          name: "APP.BTN_LOGIN",
-          title: "APP.BTN_LOGIN_TITLE",
-          className: "btn-call-login",
+          name: "APP.ACTION_LOGIN",
+          title: "APP.ACTION_LOGIN_TITLE",
+          className: "btn-login",
           callback: function loginCallback() {
             callLoginPage();
           },

@@ -57,10 +57,7 @@
 
 
 
-        "INFO_LOGGED_OUT" : "You have been logged out!",
-        "INFO_LOGIN" : "Click the button below if you wish to log in again.",
-        "BTN_LOGIN" : "Login",
-        "BTN_LOGIN_TITLE" : "Go to login page"
+        "ACTION_LOGIN_TITLE" : "Go to login page"
     },
 
     "CLIENT" : {
@@ -162,7 +159,7 @@
         "TEXT_ZOOM_AUTO_FIT"              : "Automatically fit to browser window",
         "TEXT_CLIENT_STATUS_IDLE"         : "Idle.",
         "TEXT_CLIENT_STATUS_CONNECTING"   : "Connecting to Engeman Cloud...",
-        "TEXT_CLIENT_STATUS_DISCONNECTED" : "You have been disconnected.",
+        "TEXT_CLIENT_STATUS_DISCONNECTED" : "You have been disconnected!",
         "TEXT_CLIENT_STATUS_UNSTABLE"     : "The network connection to the Engeman Cloud server appears unstable.",
         "TEXT_CLIENT_STATUS_WAITING"      : "Connected to Engeman Cloud. Waiting for response...",
         "TEXT_USER_JOINED"                : "{USERNAME} has joined the connection.",

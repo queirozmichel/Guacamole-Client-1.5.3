@@ -48,10 +48,7 @@
 
 
 
-        "INFO_LOGGED_OUT" : "¡Has sido desconectado!",
-        "INFO_LOGIN" : "Haz clic en el botón de abajo para iniciar sesión nuevamente.",
-        "BTN_LOGIN" : "Acceso",
-        "BTN_LOGIN_TITLE" : "Ir a la página de inicio de sesión"
+        "ACTION_LOGIN_TITLE" : "Ir a la página de inicio de sesión"
     },
 
     "CLIENT" : {
@@ -146,7 +143,7 @@
         "TEXT_ZOOM_AUTO_FIT"              : "Ajustar automáticamente a la ventana del navegador",
         "TEXT_CLIENT_STATUS_IDLE"         : "Inactivo.",
         "TEXT_CLIENT_STATUS_CONNECTING"   : "Conectando a Engeman Cloud...",
-        "TEXT_CLIENT_STATUS_DISCONNECTED" : "Ha sido desconectado.",
+        "TEXT_CLIENT_STATUS_DISCONNECTED" : "¡Ha sido desconectado!",
         "TEXT_CLIENT_STATUS_UNSTABLE"     : "La conexión al servidor Engeman Cloud es inestable.",
         "TEXT_CLIENT_STATUS_WAITING"      : "Conectado a Engeman Cloud. Esperando respuesta...",
         "TEXT_RECONNECT_COUNTDOWN"        : "Reconectando en {REMAINING} {REMAINING, plural, one{second} other{seconds}}...",

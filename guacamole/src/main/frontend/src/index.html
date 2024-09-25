@@ -49,9 +49,13 @@
     <div class="logged-out-modal" ng-switch-when="loggedOut">
       <guac-modal>
         <div class="notification">
-          <h3 class="h3-header-info-logout" translate="APP.INFO_LOGGED_OUT"></h3>
-          <p class="p-call-login-msg" translate="APP.INFO_LOGIN"></p>
-          <button title="Ir para a tela de login" class="btn-call-login" onclick="callLoginPage()">Login</button>
+          <p translate="CLIENT.TEXT_CLIENT_STATUS_DISCONNECTED"></p>
+          <button
+            title="{{ 'APP.ACTION_LOGIN_TITLE' | translate }}"
+            translate="APP.ACTION_LOGIN"
+            class="btn-login"
+            onclick="callLoginPage()"
+          ></button>
         </div>
       </guac-modal>
     </div>
@@ -64,7 +68,12 @@
           <p class="p-error-page-unavailable" translate="APP.ERROR_PAGE_UNAVAILABLE"></p>
         </div>
         <div>
-          <button title="{{ 'APP.BTN_LOGIN_TITLE' | translate }}" translate="APP.BTN_LOGIN" class="btn-call-login" onclick="callLoginPage()"></button>
+          <button
+            title="{{ 'APP.ACTION_LOGIN_TITLE' | translate }}"
+            translate="APP.ACTION_LOGIN"
+            class="btn-login"
+            onclick="callLoginPage()"
+          ></button>
         </div>
       </guac-modal>
     </div>
