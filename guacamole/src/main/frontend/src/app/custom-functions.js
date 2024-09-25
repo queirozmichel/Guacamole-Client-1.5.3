@@ -17,27 +17,32 @@
  * under the License.
  */
 
-//Chama a aplicação Cloud Login Handler passando o id do cliente obtido na URL
+//Redireciona para a respectiva URL do Login Único do cliente.
 function callLoginPage() {
-  if (sessionStorage.getItem("CsId") !== null) {
-    window.location.href = "https://loginunicohml.engeman.com:30002/Home/SingleSignOnUri?customerSetupId=" + sessionStorage.getItem("CsId");
+  const params = new URLSearchParams(window.location.href);
+  if (sessionStorage.getItem("URL") !== null) {
+    window.location.href = atob(sessionStorage.getItem("URL"));
   } else {
-    const params = new URLSearchParams(window.location.href);
-    window.location.href = "https://loginunicohml.engeman.com:30002/Home/SingleSignOnUri?customerSetupId=" + params.get("CsId");
+    window.location.href = "/";
   }
 }
 
-///Define a variável de sessão CsId
+///Define a variável de sessão URL
 function defineSessionStorage() {
-  if (sessionStorage.getItem("CsId") === null) {
-    const params = new URLSearchParams(window.location.href);
-    sessionStorage.setItem("CsId", params.get("CsId"));
+  const params = new URLSearchParams(window.location.href);
+  if (sessionStorage.getItem("URL") === null && params.get("Url") !== null) {
+    sessionStorage.setItem("URL", params.get("Url"));
   }
 }
 
-//Realiza a limpeza das variáveis do Local Storage após realizar o login
+//Realiza a limpeza das variáveis do Local Storage
 function clearLocalStorage() {
   localStorage.removeItem("GUAC_AUTH");
   localStorage.removeItem("GUAC_PREFERENCES");
   localStorage.removeItem("GUAC_HISTORY");
+}
+
+////Realiza a limpeza das variáveis do Session Storage
+function clearSessionStorage() {
+  sessionStorage.removeItem("URL");
 }

@@ -20,56 +20,55 @@
 /**
  * A directive for displaying an arbitrary login form.
  */
-angular.module('login').directive('guacLogin', [function guacLogin() {
-
+angular.module("login").directive("guacLogin", [
+  function guacLogin() {
     // Login directive
     var directive = {
-        restrict    : 'E',
-        replace     : true,
-        templateUrl : 'app/login/templates/login.html'
+      restrict: "E",
+      replace: true,
+      templateUrl: "app/login/templates/login.html",
     };
 
     // Login directive scope
     directive.scope = {
+      /**
+       * An optional instructional message to display within the login
+       * dialog.
+       *
+       * @type TranslatableMessage
+       */
+      helpText: "=",
 
-        /**
-         * An optional instructional message to display within the login
-         * dialog.
-         *
-         * @type TranslatableMessage
-         */
-        helpText : '=',
+      /**
+       * The login form or set of fields. This will be displayed to the user
+       * to capture their credentials.
+       *
+       * @type Field[]
+       */
+      form: "=",
 
-        /**
-         * The login form or set of fields. This will be displayed to the user
-         * to capture their credentials.
-         *
-         * @type Field[]
-         */
-        form : '=',
-
-        /**
-         * A map of all field name/value pairs that have already been provided.
-         * If not null, the user will be prompted to continue their login
-         * attempt using only the fields which remain.
-         */
-        values : '='
-
+      /**
+       * A map of all field name/value pairs that have already been provided.
+       * If not null, the user will be prompted to continue their login
+       * attempt using only the fields which remain.
+       */
+      values: "=",
     };
 
     // Controller for login directive
-    directive.controller = ['$scope', '$injector',
-        function loginController($scope, $injector) {
-        
+    directive.controller = [
+      "$scope",
+      "$injector",
+      function loginController($scope, $injector) {
         // Required types
-        var Error = $injector.get('Error');
-        var Field = $injector.get('Field');
+        var Error = $injector.get("Error");
+        var Field = $injector.get("Field");
 
         // Required services
-        var $rootScope            = $injector.get('$rootScope');
-        var $route                = $injector.get('$route');
-        var authenticationService = $injector.get('authenticationService');
-        var requestService        = $injector.get('requestService');
+        var $rootScope = $injector.get("$rootScope");
+        var $route = $injector.get("$route");
+        var authenticationService = $injector.get("authenticationService");
+        var requestService = $injector.get("requestService");
 
         /**
          * The initial value for all login fields. Note that this value must
@@ -86,7 +85,7 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
          * @constant
          * @type String
          */
-        var DEFAULT_FIELD_VALUE = '';
+        var DEFAULT_FIELD_VALUE = "";
 
         /**
          * A description of the error that occurred during login, if any.
@@ -133,43 +132,37 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
          *     true if a previous login attempt is continuing, false otherwise.
          */
         $scope.isContinuation = function isContinuation() {
+          // The login is continuing if any parameter values are provided
+          for (var name in $scope.values) return true;
 
-            // The login is continuing if any parameter values are provided
-            for (var name in $scope.values)
-                return true;
-
-            return false;
-
+          return false;
         };
 
         // Ensure provided values are included within entered values, even if
         // they have no corresponding input fields
-        $scope.$watch('values', function resetEnteredValues(values) {
-            angular.extend($scope.enteredValues, values || {});
+        $scope.$watch("values", function resetEnteredValues(values) {
+          angular.extend($scope.enteredValues, values || {});
         });
 
         // Update field information when form is changed
-        $scope.$watch('form', function resetRemainingFields(fields) {
+        $scope.$watch("form", function resetRemainingFields(fields) {
+          // If no fields are provided, then no fields remain
+          if (!fields) {
+            $scope.remainingFields = [];
+            return;
+          }
 
-            // If no fields are provided, then no fields remain
-            if (!fields) {
-                $scope.remainingFields = [];
-                return;
-            }
+          // Filter provided fields against provided values
+          $scope.remainingFields = fields.filter(function isRemaining(field) {
+            return !(field.name in $scope.values);
+          });
 
-            // Filter provided fields against provided values
-            $scope.remainingFields = fields.filter(function isRemaining(field) {
-                return !(field.name in $scope.values);
-            });
+          // Set default values for all unset fields
+          angular.forEach($scope.remainingFields, function setDefault(field) {
+            if (!$scope.enteredValues[field.name]) $scope.enteredValues[field.name] = DEFAULT_FIELD_VALUE;
+          });
 
-            // Set default values for all unset fields
-            angular.forEach($scope.remainingFields, function setDefault(field) {
-                if (!$scope.enteredValues[field.name])
-                    $scope.enteredValues[field.name] = DEFAULT_FIELD_VALUE;
-            });
-
-            $scope.relevantField = getRelevantField();
-
+          $scope.relevantField = getRelevantField();
         });
 
         /**
@@ -177,51 +170,50 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
          * authentication service, redirecting to the main view if successful.
          */
         $scope.login = function login() {
+          // Authentication is now in progress
+          $scope.submitted = true;
 
-            // Authentication is now in progress
-            $scope.submitted = true;
+          // Start with cleared status
+          $scope.loginError = null;
 
-            // Start with cleared status
-            $scope.loginError = null;
-
-            // Attempt login once existing session is destroyed
-            authenticationService.authenticate($scope.enteredValues)
+          // Attempt login once existing session is destroyed
+          authenticationService
+            .authenticate($scope.enteredValues)
 
             // Retry route upon success (entered values will be cleared only
             // after route change has succeeded as this can take time)
             .then(function loginSuccessful() {
-                $route.reload();
+              clearSessionStorage();
+              $route.reload();
             })
 
-            // Reset upon failure
-            ['catch'](requestService.createErrorCallback(function loginFailed(error) {
-
+            [
+              // Reset upon failure
+              "catch"
+            ](
+              requestService.createErrorCallback(function loginFailed(error) {
                 // Initial submission is complete and has failed
                 $scope.submitted = false;
 
                 // Clear out passwords if the credentials were rejected for any reason
                 if (error.type !== Error.Type.INSUFFICIENT_CREDENTIALS) {
+                  // Flag generic error for invalid login
+                  if (error.type === Error.Type.INVALID_CREDENTIALS)
+                    $scope.loginError = {
+                      key: "LOGIN.ERROR_INVALID_LOGIN",
+                    };
+                  // Display error if anything else goes wrong
+                  else $scope.loginError = error.translatableMessage;
 
-                    // Flag generic error for invalid login
-                    if (error.type === Error.Type.INVALID_CREDENTIALS)
-                        $scope.loginError = {
-                            'key' : 'LOGIN.ERROR_INVALID_LOGIN'
-                        };
-
-                    // Display error if anything else goes wrong
-                    else
-                        $scope.loginError = error.translatableMessage;
-
-                    // Reset all remaining fields to default values, but
-                    // preserve any usernames
-                    angular.forEach($scope.remainingFields, function clearEnteredValueIfPassword(field) {
-                        if (field.type !== Field.Type.USERNAME && field.name in $scope.enteredValues)
-                            $scope.enteredValues[field.name] = DEFAULT_FIELD_VALUE;
-                    });
+                  // Reset all remaining fields to default values, but
+                  // preserve any usernames
+                  angular.forEach($scope.remainingFields, function clearEnteredValueIfPassword(field) {
+                    if (field.type !== Field.Type.USERNAME && field.name in $scope.enteredValues)
+                      $scope.enteredValues[field.name] = DEFAULT_FIELD_VALUE;
+                  });
                 }
-
-            }));
-
+              })
+            );
         };
 
         /**
@@ -233,25 +225,22 @@ angular.module('login').directive('guacLogin', [function guacLogin() {
          *     field.
          */
         var getRelevantField = function getRelevantField() {
+          for (var i = 0; i < $scope.remainingFields.length; i++) {
+            var field = $scope.remainingFields[i];
+            if (!$scope.enteredValues[field.name]) return field;
+          }
 
-            for (var i = 0; i < $scope.remainingFields.length; i++) {
-                var field = $scope.remainingFields[i];
-                if (!$scope.enteredValues[field.name])
-                    return field;
-            }
-
-            return null;
-
+          return null;
         };
 
         // Reset state after authentication and routing have succeeded
-        $rootScope.$on('$routeChangeSuccess', function routeChanged() {
-            $scope.enteredValues = {};
-            $scope.submitted = false;
+        $rootScope.$on("$routeChangeSuccess", function routeChanged() {
+          $scope.enteredValues = {};
+          $scope.submitted = false;
         });
-
-    }];
+      },
+    ];
 
     return directive;
-
-}]);
+  },
+]);

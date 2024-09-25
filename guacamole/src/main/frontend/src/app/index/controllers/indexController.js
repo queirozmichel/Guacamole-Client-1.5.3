@@ -21,9 +21,6 @@
  * The controller for the root of the application.
  */
 
-clearLocalStorage();
-defineSessionStorage();
-
 angular.module("index").controller("indexController", [
   "$scope",
   "$injector",
