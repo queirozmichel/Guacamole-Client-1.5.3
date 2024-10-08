@@ -26,7 +26,7 @@
     <groupId>org.apache.guacamole</groupId>
     <artifactId>guacamole</artifactId>
     <packaging>war</packaging>
-    <version>1.5.3</version>
+    <version>1.5.3.1</version>
     <name>guacamole</name>
     <url>http://guacamole.apache.org/</url>
 
